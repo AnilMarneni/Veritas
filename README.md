@@ -1,34 +1,34 @@
-# Veritas - Agricultural Marketplace & Traceability System
+# Veritas — MERN Agricultural Marketplace with QR Traceability
 
-Veritas is a backend-focused MERN stack B2B marketplace that enables verified farmers to sell crop yields directly to buyers, backed by QR-based chronological product traceability and verification.
+Veritas is a backend-focused MERN stack agricultural marketplace that enables verified farmers to sell crop yields directly to buyers, backed by QR-based product traceability and verification.
 
-Designed to showcase realistic database modeling, robust API design, role-based access control, and transaction safety in a unified MERN codebase.
+Designed to showcase clean database modeling, well-structured Express API routing, role-based access control (RBAC), and transaction safety in a single, consolidated MERN codebase.
 
 ---
 
-## 🚀 Key Engineering & Architecture Highlights
+## 🚀 Key Engineering & Implementation Highlights
 
-### 1. Robust Modular Express Backend
-The backend utilizes a clean, modular Express architecture. Instead of an overengineered microservice monorepo, the application is consolidated into a single codebase structured domain-by-domain under `server/modules/`:
+### 1. Modular Express Backend
+The backend utilizes a clean, modular structure. Instead of an overengineered microservice monorepo, the application is consolidated into a single codebase structured domain-by-domain under `server/modules/`:
 *   `auth/` - Token-based registration, login, and sessions
 *   `users/` - User profiles and farmer verification
 *   `products/` - Crop catalog CRUD, filtering, and stock levels
-*   `certifications/` - Agricultural cert uploads (Organic, GMO-Free)
+*   `certifications/` - Agricultural certification uploads (Organic, GMO-Free)
 *   `orders/` - Checkout and inventory deduction
-*   `traceability/` - Product lifecycle timeline and scan history auditing
-*   `admin/` - Platform moderation, verification approvals, and listings regulation
+*   `traceability/` - Product lifecycle timeline and scan history logging
+*   `admin/` - Platform verification approvals and listings visibility toggle
 
-### 2. Transaction Safety & Atomic Inventory Deductions
-To prevent stock inconsistencies (overselling or double-allocation) during simultaneous checkouts, the checkout endpoint implements atomic updates:
+### 2. Preventing Stock Inconsistencies during Simultaneous Orders
+To prevent stock levels from going out of sync (overselling or double-allocation) during checkout, the checkout endpoint implements atomic updates:
 *   **Atomic Query Filtering**: Employs `findOneAndUpdate` with a condition `{ stockQuantity: { $gte: item.quantity } }` and modification `{ $inc: { stockQuantity: -item.quantity } }`. This executes as a single atomic write operation in MongoDB.
 *   **Mongoose Multi-Document Transactions**: Automatically wraps checkout steps in a transaction session (`startSession`, `startTransaction`) when connected to a replica set/sharded environment, rolling back inventory deductions if any order step fails.
 
-### 3. QR-Based Traceability & Audit Logs
-*   **Verification Timeline**: Enables farmers to register chronological crop events (`seed` -> `planting` -> `growing` -> `harvest` -> `processing` -> `packaging` -> `shipping` -> `retail`).
+### 3. QR-Based Product Traceability and Verification
+*   **Traceability Timeline**: Enables farmers to register chronological crop events (`seed` -> `planting` -> `growing` -> `harvest` -> `processing` -> `packaging` -> `shipping` -> `retail`).
 *   **QR Landing Endpoint**: Exposes a public endpoint `/trace/:productId` that fetches the entire product history, including farmer details, organic credentials, and timeline.
-*   **Scan Auditing**: Every scan of the QR code logs metadata asynchronously (`ScanHistory`) including the visitor's User-Agent, IP address, and approximate location (retrieved via browser Geolocation consent).
+*   **Scan History Logging**: Every scan of the QR code logs metadata asynchronously (`ScanHistory`) including the visitor's User-Agent, IP address, and approximate location details (retrieved via browser Geolocation consent).
 
-### 4. Farmer Verification System
+### 4. Farmer Verification Workflow
 *   Farmers register with an initial verification status of `none`.
 *   Farmers upload a verification document (licensing, land deed, or ID) via a Multer-Cloudinary pipeline.
 *   The upload updates their status to `pending`, notifying the platform administrator.
@@ -53,7 +53,7 @@ veritas/
 │   ├── src/
 │   │   ├── components/         # Common widgets (Header, Footer)
 │   │   ├── context/            # AuthContext (JWT session state)
-│   │   └── pages/              # Portal Dashboards (Farmer, Buyer, Admin, Trace)
+│   │   └── pages/              # Dashboard Pages (Farmer, Buyer, Admin, Trace)
 │   ├── package.json
 │   └── index.html
 ├── server/                     # Express.js REST API Backend

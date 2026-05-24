@@ -8,8 +8,8 @@ const router = express.Router();
 router.use(protect);
 router.use(authorize('admin'));
 
-router.get('/kyc', getPendingFarmers);
-router.put('/kyc/:id', verifyFarmer);
+router.get('/verification', getPendingFarmers);
+router.put('/verification/:id', verifyFarmer);
 
 router.get('/certifications', getPendingCertifications);
 router.put('/certifications/:id', verifyCertification);

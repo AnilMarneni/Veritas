@@ -124,7 +124,7 @@ export const Traceability = () => {
     return (
       <div className="max-w-3xl mx-auto px-4 py-20 text-center flex flex-col items-center justify-center">
         <Activity className="w-12 h-12 text-primary-500 animate-spin mb-4" />
-        <p className="text-slate-600 font-medium">Resolving Veritas Supply Chain Ledger...</p>
+        <p className="text-slate-600 font-medium">Resolving Veritas Supply Chain History...</p>
         <p className="text-xs text-slate-400 mt-2">{locationLogMsg}</p>
       </div>
     );
@@ -157,8 +157,8 @@ export const Traceability = () => {
           <div>
             <h2 className="text-lg font-bold text-emerald-950">Crop Authenticity Verified</h2>
             <p className="text-xs text-emerald-700 leading-relaxed max-w-xl">
-              This agricultural product is registered in the Veritas verification ledger. 
-              Its origin coordinates, farming parameters, and approved credentials have been authenticated.
+              This agricultural product is registered in the Veritas verification database. 
+              Its origin details, farming parameters, and approved credentials have been authenticated.
             </p>
           </div>
         </div>

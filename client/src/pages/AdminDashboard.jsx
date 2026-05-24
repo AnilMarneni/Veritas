@@ -22,7 +22,7 @@ export const AdminDashboard = () => {
   const fetchPendingFarmers = async () => {
     setFarmersLoading(true);
     try {
-      const res = await axios.get(`${API_URL}/admin/kyc`, {
+      const res = await axios.get(`${API_URL}/admin/verification`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPendingFarmers(res.data.data);
@@ -59,7 +59,7 @@ export const AdminDashboard = () => {
     setFarmerMsg('');
     try {
       await axios.put(
-        `${API_URL}/admin/kyc/${userId}`,
+        `${API_URL}/admin/verification/${userId}`,
         { status: action },
         { headers: { Authorization: `Bearer ${token}` } }
       );

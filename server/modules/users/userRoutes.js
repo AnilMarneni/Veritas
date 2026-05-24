@@ -5,9 +5,8 @@ const { upload } = require('../../config/cloudinary');
 
 const router = express.Router();
 
-// Allow both /verification and /kyc endpoints to handle farmer verification uploads
+// Handle farmer verification document uploads
 router.post('/verification', protect, authorize('farmer'), upload.single('document'), requestFarmerVerification);
-router.post('/kyc', protect, authorize('farmer'), upload.single('document'), requestFarmerVerification);
 
 router.put('/profile', protect, updateProfile);
 

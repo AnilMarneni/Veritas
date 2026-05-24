@@ -3,7 +3,7 @@ const Certification = require('../certifications/Certification');
 const Product = require('../products/Product');
 
 // @desc    Get all pending farmer verification requests
-// @route   GET /api/v1/admin/kyc
+// @route   GET /api/v1/admin/verification
 // @access  Private (Admin)
 exports.getPendingFarmers = async (req, res, next) => {
   try {
@@ -23,7 +23,7 @@ exports.getPendingFarmers = async (req, res, next) => {
 };
 
 // @desc    Approve or reject farmer verification
-// @route   PUT /api/v1/admin/kyc/:id
+// @route   PUT /api/v1/admin/verification/:id
 // @access  Private (Admin)
 exports.verifyFarmer = async (req, res, next) => {
   try {

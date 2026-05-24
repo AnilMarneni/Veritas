@@ -1,7 +1,7 @@
 const User = require('./User');
 
 // @desc    Submit farmer verification document
-// @route   POST /api/v1/users/kyc (mapped to /verification in clean terminology, but we keep routing simple)
+// @route   POST /api/v1/users/verification
 // @access  Private (Farmer)
 exports.requestFarmerVerification = async (req, res, next) => {
   try {
