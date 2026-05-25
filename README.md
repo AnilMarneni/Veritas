@@ -6,6 +6,56 @@ Designed to showcase clean database modeling, well-structured Express API routin
 
 ---
 
+## 📐 System Architecture
+
+Here is the architectural design showing the integration of the React frontend, modular Express REST API, MongoDB storage, and Cloudinary media pipeline:
+
+```mermaid
+flowchart TD
+    %% Clients
+    subgraph ClientLayer ["Client (React SPA)"]
+        A["React App (Vite, React Router, TailwindCSS)"]
+    end
+
+    %% Web Server / Routing
+    subgraph ServerLayer ["Server (Express REST API)"]
+        B["Express.js App (Port 5000)"]
+        C["JWT Auth Middleware"]
+        D["Role Middleware (RBAC)"]
+        E["Multer Upload Handler"]
+        
+        B --> C
+        B --> D
+        B --> E
+    end
+
+    %% Database & Cloud Storage
+    subgraph StorageLayer ["Data & Cloud Storage"]
+        F[("MongoDB Database (Port 27017)")]
+        G["Cloudinary (Media & PDFs)"]
+    end
+
+    %% Flow
+    A -- HTTPS Requests / JWT Token --> B
+    C -- Queries / Transactions --> F
+    E -- Upload Media Files --> G
+```
+
+---
+
+## 📸 Application Screenshots
+
+Below are live views of the application dashboards, landing page, and verification tracking workflows:
+
+| Marketplace Landing Page | Public Traceability Timeline |
+| :---: | :---: |
+| ![Marketplace Landing Page](./docs/screenshots/01_landing_page.png) | ![Public Traceability Timeline](./docs/screenshots/21_public_traceability_verified.png) |
+| **Farmer Crop Creation Dashboard** | **Admin Control Panel** |
+| ![Farmer Crop Creation Dashboard](./docs/screenshots/10_crop_created_draft.png) | ![Admin Control Panel](./docs/screenshots/06_admin_dashboard_loaded.png) |
+
+---
+
+
 ## 🚀 Key Engineering & Implementation Highlights
 
 ### 1. Modular Express Backend
